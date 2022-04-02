@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="content">
+
+</div>
+</body>
+
+<script>
+  const STARTING_NUMBER_X = 775;
+  const STARTING_NUMBER_Y = 245;
+  const SIZE = 300;
+  const SQUARE_SIZE = 50;
+  const content = document.getElementById('content');
+
+  // Make canvas
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE * SQUARE_SIZE;
+  canvas.height = SIZE * SQUARE_SIZE;
+
+  // Add canvas to content
+  content.appendChild(canvas);
+
+  // Get context
+  const ctx = canvas.getContext('2d');
+
+  ctx.font = '8px Arial';
+
+  // Draw grid
+  for (let x = 0; x < SIZE; x++) {
+    ctx.beginPath();
+    ctx.moveTo(x * SQUARE_SIZE, 0);
+    ctx.lineTo(x * SQUARE_SIZE, SIZE * SQUARE_SIZE);
+    ctx.stroke();
+  }
+
+  for (let y = 0; y < SIZE; y++) {
+    ctx.beginPath();
+    ctx.moveTo(0, y * SQUARE_SIZE);
+    ctx.lineTo(SIZE * SQUARE_SIZE, y * SQUARE_SIZE);
+    ctx.stroke();
+  }
+
+  // Draw a square around the numbers
+  for (let x = 0; x < SIZE; x++) {
+    for (let y = 0; y < SIZE; y++) {
+      ctx.beginPath();
+      ctx.moveTo((x * SQUARE_SIZE) + 25, y * SQUARE_SIZE);
+      ctx.lineTo((x * SQUARE_SIZE) + 25, (y * SQUARE_SIZE) + 25);
+
+      ctx.moveTo(x * SQUARE_SIZE, (y * SQUARE_SIZE) + 25);
+      ctx.lineTo((x * SQUARE_SIZE) + 26, (y * SQUARE_SIZE) + 25);
+      ctx.stroke();
+    }
+  }
+
+  // Draw numbers in the grid squares
+  for (let x = 0; x < SIZE; x++) {
+    for (let y = 0; y < SIZE; y++) {
+      ctx.fillText(x + STARTING_NUMBER_X, x * SQUARE_SIZE + 5, y * SQUARE_SIZE + 10);
+      ctx.fillText(y + STARTING_NUMBER_Y, x * SQUARE_SIZE + 5, y * SQUARE_SIZE + 20);
+    }
+  }
+</script>
+</html>
